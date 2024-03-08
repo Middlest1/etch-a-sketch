@@ -13,16 +13,6 @@ const selectOutputDiv = document.querySelector('#gridContainer');
 const containerWidth = 960;
 let currentNumOfSquares = 16;
 
-function randomRGB() {
-    const r = Math.floor(Math.random() * 256);
-    const g = Math.floor(Math.random() * 256);
-    const b = Math.floor(Math.random() * 256);
-    return `rgb(${r}, ${g}, ${b})`;
-}
-
-console.log(Math.random())
-console.log(randomRGB());
-
 
 function createGrid(numOfSquares) {
 
@@ -41,17 +31,44 @@ function createGrid(numOfSquares) {
     let squareOfGrid = document.querySelectorAll('.grid');
 
     squareOfGrid.forEach(function (squareHovered) {
-
         squareHovered.addEventListener('mouseover', function () {
-            squareHovered.style.backgroundColor = 'red';
-        })
-    })
+            if (rainbowButton.classList.contains('active')) {
+                squareHovered.style.backgroundColor = randomRGB();
+            } else {
+                squareHovered.style.backgroundColor = 'red';
+            }
+        });
+    });
 }
+
+
+
+
+// Gradual Button
+
+
+
+// Rainbow Button
+
+function randomRGB() {
+    const r = Math.floor(Math.random() * 256);
+    const g = Math.floor(Math.random() * 256);
+    const b = Math.floor(Math.random() * 256);
+    return `rgb(${r}, ${g}, ${b})`;
+}
+
+console.log(Math.random());
+console.log(randomRGB());
+
+const rainbowButton = document.querySelector('#rainbowMode');
+rainbowButton.addEventListener('click', function () {
+    rainbowButton.classList.toggle('active');
+});
 
 
 // Reset Button
 
-const resetGridButton = document.querySelector('#resetGrid')
+const resetGridButton = document.querySelector('#resetGrid');
 
 resetGridButton.addEventListener('click', function () {
     userAnswer = confirm('This will wipe the Etch-a-Sketch clean! Your drawing will go bye-bye! Proceed?');
@@ -64,9 +81,10 @@ resetGridButton.addEventListener('click', function () {
 createGrid(currentNumOfSquares);
 
 
+
 // Adjust Grid Button
 
-let changeGridButton = document.querySelector('#changeGrid');
+const changeGridButton = document.querySelector('#changeGrid');
 
 changeGridButton.addEventListener('click', function () {
 

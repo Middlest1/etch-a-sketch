@@ -11,7 +11,7 @@ body {
 
 .grid {
     box-sizing: border-box;
-    background-color: aqua;
+    background-color: #ffffff;
     border: 1px black solid;
 }
 
@@ -24,4 +24,8 @@ body {
 
 h1 {
     text-align: center;
+}
+
+.active {
+    background-color: rgb(255, 246, 120);
 }
