@@ -9,6 +9,8 @@
 // Add a button that will randomize the squares RGB values with each interaction
 // Implement a progressive darkening effect where each interaction adds 10% more black or color to the square. The objective is to achieve a completely black square only after ten interactions.
 
+
+
 const selectOutputDiv = document.querySelector('#gridContainer');
 const containerWidth = 960;
 let currentNumOfSquares = 16;
@@ -25,6 +27,7 @@ function createGrid(numOfSquares) {
         newSquare.classList.add('grid');
         newSquare.style.width = `${squareSize}px`;
         newSquare.style.height = `${squareSize}px`;
+        newSquare.setAttribute('data-darkening-level', '0');
         selectOutputDiv.appendChild(newSquare);
     }
 
@@ -34,17 +37,34 @@ function createGrid(numOfSquares) {
         squareHovered.addEventListener('mouseover', function () {
             if (rainbowButton.classList.contains('active')) {
                 squareHovered.style.backgroundColor = randomRGB();
+            } else if (gradualButton.classList.contains('active')) {
+                squareHovered.style.backgroundColor = decreaseBrightness();
             } else {
-                squareHovered.style.backgroundColor = 'red';
+                squareHovered.style.backgroundColor = 'black';
             }
         });
     });
 }
 
-
+createGrid(currentNumOfSquares);
 
 
 // Gradual Button
+
+const gradualButton = document.querySelector('#gradualMode');
+gradualMode.addEventListener('click', function () {
+    gradualMode.classList.toggle('active');
+    if (rainbowButton.classList.contains('active')) {
+        rainbowButton.classList.toggle('active');
+    }
+});
+
+function decreaseBrightness() {
+    let squareOfGrid = document.querySelectorAll('.grid');
+    squareOfGrid.forEach(function (square) {
+        square.style.filter = `brightness(80%)`;
+    })
+}
 
 
 
@@ -63,7 +83,11 @@ console.log(randomRGB());
 const rainbowButton = document.querySelector('#rainbowMode');
 rainbowButton.addEventListener('click', function () {
     rainbowButton.classList.toggle('active');
+    if (gradualButton.classList.contains('active')) {
+        gradualButton.classList.toggle('active');
+    }
 });
+
 
 
 // Reset Button
@@ -77,8 +101,6 @@ resetGridButton.addEventListener('click', function () {
         createGrid(currentNumOfSquares);
     }
 });
-
-createGrid(currentNumOfSquares);
 
 
 
