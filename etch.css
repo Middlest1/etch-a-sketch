@@ -11,15 +11,15 @@ body {
 
 .grid {
     box-sizing: border-box;
-    height: 60px;
-    width: 60px;
     background-color: aqua;
     border: 1px black solid;
 }
 
-#changeGrid {
-    display: block;
-    margin: 20px auto;
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
 }
 
 h1 {
