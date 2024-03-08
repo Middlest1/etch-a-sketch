@@ -9,28 +9,52 @@
 // Add a button that will randomize the squares RGB values with each interaction
 // Implement a progressive darkening effect where each interaction adds 10% more black or color to the square. The objective is to achieve a completely black square only after ten interactions.
 
+const selectOutputDiv = document.querySelector('#gridContainer');
 
 
-
-function createSquare(numOfSquares) {
+function createGrid(numOfSquares) {
 
     while (numOfSquares > 0) {
-        const selectOutputDiv = document.querySelector('#gridContainer');
         let newSquare = document.createElement("div");
         newSquare.classList.add('grid');
         selectOutputDiv.appendChild(newSquare);
         numOfSquares--;
     }
+
+    let squareOfGrid = document.querySelectorAll('.grid');
+
+    squareOfGrid.forEach(function (squareHovered) {
+
+        squareHovered.addEventListener('mouseover', function () {
+            squareHovered.style.backgroundColor = 'red';
+        })
+    })
 }
 
-createSquare(256);
+createGrid(256);
 
 
-let squareOfGrid = document.querySelectorAll('.grid');
 
-squareOfGrid.forEach(function (squareHovered) {
+let changeGridButton = document.querySelector('#changeGrid');
 
-    squareHovered.addEventListener('mouseover', function () {
-        squareHovered.style.backgroundColor = 'red';
-    })
+changeGridButton.addEventListener('click', function () {
+
+    selectOutputDiv.innerHTML = '';
+    let userEnteredNumOfSquares = 0;
+
+    while (userEnteredNumOfSquares < 1 || userEnteredNumOfSquares > 100) {
+        let userInput = prompt('How many squares per side would you like? Please enter a number less than 100 and greater than 0.')
+        userEnteredNumOfSquares = userInput;
+
+        if (userInput == null) {
+            createGrid(256);
+            break;
+        }
+
+        else if (isNaN(userEnteredNumOfSquares)) {
+            userEnteredNumOfSquares = 0;
+        }
+    }
+
+    createGrid(userEnteredNumOfSquares);
 })

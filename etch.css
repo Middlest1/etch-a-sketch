@@ -16,3 +16,12 @@ body {
     background-color: aqua;
     border: 1px black solid;
 }
+
+#changeGrid {
+    display: block;
+    margin: 20px auto;
+}
+
+h1 {
+    text-align: center;
+}
