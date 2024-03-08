@@ -1,3 +1,7 @@
+/* Pseudocode */
+// Create 16 squares then break to a new line
+
+
 
 
 function createSquare(numOfSquares) {
@@ -13,4 +17,4 @@ function createSquare(numOfSquares) {
     }
 }
 
-createSquare(16);
+createSquare(256);

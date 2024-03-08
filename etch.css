@@ -1,3 +1,18 @@
 body {
     background-color: #efefef;
+    width: 960px;
+    margin: auto;
+}
+
+#gridContainer {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.grid {
+    box-sizing: border-box;
+    height: 60px;
+    width: 60px;
+    background-color: aqua;
+    border: 1px black solid;
 }
