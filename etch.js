@@ -11,7 +11,7 @@
 
 const selectOutputDiv = document.querySelector('#gridContainer');
 const containerWidth = 960;
-
+let currentNumOfSquares = 16;
 
 function randomRGB() {
     const r = Math.floor(Math.random() * 256);
@@ -26,6 +26,8 @@ console.log(randomRGB());
 
 function createGrid(numOfSquares) {
 
+    selectOutputDiv.innerHTML = '';
+    currentNumOfSquares = numOfSquares;
     let squareSize = containerWidth / numOfSquares;
 
     for (let i = 0; i < numOfSquares ** 2; i++) {
@@ -46,9 +48,23 @@ function createGrid(numOfSquares) {
     })
 }
 
-createGrid(16);
+
+// Reset Button
+
+const resetGridButton = document.querySelector('#resetGrid')
+
+resetGridButton.addEventListener('click', function () {
+    userAnswer = confirm('This will wipe the Etch-a-Sketch clean! Your drawing will go bye-bye! Proceed?');
+    if (userAnswer == true) {
+        selectOutputDiv.innerHTML = '';
+        createGrid(currentNumOfSquares);
+    }
+});
+
+createGrid(currentNumOfSquares);
 
 
+// Adjust Grid Button
 
 let changeGridButton = document.querySelector('#changeGrid');
 
@@ -73,3 +89,5 @@ changeGridButton.addEventListener('click', function () {
 
     createGrid(userEnteredNumOfSquares);
 })
+
+
