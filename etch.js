@@ -13,13 +13,13 @@
 
 const selectOutputDiv = document.querySelector('#gridContainer');
 const containerWidth = 960;
-let currentNumOfSquares = 16;
+let numOfSquaresInRow = 16;
 
 
 function createGrid(numOfSquares) {
 
     selectOutputDiv.innerHTML = '';
-    currentNumOfSquares = numOfSquares;
+    numOfSquaresInRow = numOfSquares;
     let squareSize = containerWidth / numOfSquares;
 
     for (let i = 0; i < numOfSquares ** 2; i++) {
@@ -38,6 +38,7 @@ function createGrid(numOfSquares) {
             if (rainbowButton.classList.contains('active')) {
                 squareHovered.style.backgroundColor = randomRGB();
                 squareHovered.setAttribute('data-darkening-level', '0');
+                squareHovered.style.filter = 'none';
             } else if (gradualButton.classList.contains('active')) {
                 let darkeningLevel = parseInt(squareHovered.getAttribute('data-darkening-level')) || 0;
                 darkeningLevel = Math.min(darkeningLevel + 1, 10);
@@ -52,7 +53,7 @@ function createGrid(numOfSquares) {
     });
 }
 
-createGrid(currentNumOfSquares);
+createGrid(numOfSquaresInRow);
 
 
 // Gradual Button
@@ -95,7 +96,7 @@ resetGridButton.addEventListener('click', function () {
     userAnswer = confirm('This will wipe the Etch-a-Sketch clean! Your drawing will go bye-bye! Proceed?');
     if (userAnswer == true) {
         selectOutputDiv.innerHTML = '';
-        createGrid(currentNumOfSquares);
+        createGrid(numOfSquaresInRow);
     }
 });
 
