@@ -37,10 +37,16 @@ function createGrid(numOfSquares) {
         squareHovered.addEventListener('mouseover', function () {
             if (rainbowButton.classList.contains('active')) {
                 squareHovered.style.backgroundColor = randomRGB();
+                squareHovered.setAttribute('data-darkening-level', '0');
             } else if (gradualButton.classList.contains('active')) {
-                squareHovered.style.backgroundColor = decreaseBrightness();
+                let darkeningLevel = parseInt(squareHovered.getAttribute('data-darkening-level')) || 0;
+                darkeningLevel = Math.min(darkeningLevel + 1, 10);
+                squareHovered.setAttribute('data-darkening-level', darkeningLevel.toString());
+                squareHovered.style.filter = `brightness(${100 - darkeningLevel * 10}%)`;
             } else {
                 squareHovered.style.backgroundColor = 'black';
+                squareHovered.setAttribute('data-darkening-level', '0');
+                squareHovered.style.filter = 'none';
             }
         });
     });
@@ -58,15 +64,6 @@ gradualMode.addEventListener('click', function () {
         rainbowButton.classList.toggle('active');
     }
 });
-
-function decreaseBrightness() {
-    let squareOfGrid = document.querySelectorAll('.grid');
-    squareOfGrid.forEach(function (square) {
-        square.style.filter = `brightness(80%)`;
-    })
-}
-
-
 
 // Rainbow Button
 
